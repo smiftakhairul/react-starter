@@ -5,6 +5,7 @@ import {
   Route,
   Link,
   NavLink,
+  useLocation,
   matchPath,
 } from "react-router-dom";
 
@@ -12,15 +13,26 @@ class Navbar extends Component {
   state = {};
 
   render() {
+    // const match = matchPath(window.location.pathname, {
+    //   path: "/counters",
+    //   exact: true,
+    //   strict: true,
+    // });
+
     return (
       // <Router>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
-            Navbar{" "}
-            <span className="badge badge-primary">
-              {this.props.totalCounters}
-            </span>
+            Navbar
+            <Route path="/counters">
+              <span>
+                &nbsp;
+                <span className="badge badge-primary">
+                  {this.props.totalCounters}
+                </span>
+              </span>
+            </Route>
           </a>
           <button
             className="navbar-toggler"
