@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // import logo from "./logo.svg";
 import "./App.css";
-import Navbar from "./components/navbar";
-import Counters from "./components/counters";
+import Navbar from "./components/common/navbar";
+import Counters from "./components/counters/counters";
+import Home from "./components/home/home";
+import Test from "./components/test/test";
 
 class App extends Component {
   state = {
@@ -72,18 +75,36 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <Navbar
-          totalCounters={
-            this.state.counters.filter((counter) => counter.value > 0).length
-          }
-        />
-        <main className="container">
-          <Counters
+        <Router>
+          <Navbar
+            totalCounters={
+              this.state.counters.filter((counter) => counter.value > 0).length
+            }
+          />
+          <main className="container">
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/counters">
+                <Counters
+                  counters={this.state.counters}
+                  onCounterUpdate={this.handleCounter}
+                  onCounterReset={this.handleReset}
+                />
+              </Route>
+              <Route path="/test">
+                <Test />
+              </Route>
+            </Switch>
+
+            {/* <Counters
             counters={this.state.counters}
             onCounterUpdate={this.handleCounter}
             onCounterReset={this.handleReset}
-          />
-        </main>
+          /> */}
+          </main>
+        </Router>
       </React.Fragment>
     );
   }
