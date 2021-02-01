@@ -19,6 +19,7 @@ class App extends Component {
 
   componentDidMount() {
     // ajax or api call
+    console.log(process.env);
     console.log("App - Mounted");
     const counters = [
       { id: 1, value: 1 },
